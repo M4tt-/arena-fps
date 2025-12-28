@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1sxxj42rngml"]
+
+[ext_resource type="PackedScene" uid="uid://bdp6qskjdc8l5" path="res://levels/level.tscn" id="1_6b34o"]
+[ext_resource type="PackedScene" uid="uid://bwriig0drl4wn" path="res://scenes/environment/environment.tscn" id="2_jtqs4"]
+[ext_resource type="PackedScene" uid="uid://bxdmble8ttjr7" path="res://scenes/player/player_controller.tscn" id="3_v2pe6"]
+[ext_resource type="PackedScene" uid="uid://c0asx6uqndvtn" path="res://scenes/player/mouse_capture.tscn" id="4_j78l8"]
+
+[node name="Main" type="Node"]
+
+[node name="Level" parent="." instance=ExtResource("1_6b34o")]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_jtqs4")]
+
+[node name="PlayerController" parent="." instance=ExtResource("3_v2pe6")]
+
+[node name="Components" parent="." instance=ExtResource("4_j78l8")]

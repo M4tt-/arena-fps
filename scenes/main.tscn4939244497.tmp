@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfncmdpr561am"]
+
+[ext_resource type="Script" uid="uid://bqxjdi0x3ecmw" path="res://assets/scripts/main.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bdp6qskjdc8l5" path="res://levels/level.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bwriig0drl4wn" path="res://scenes/environment/environment.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bxdmble8ttjr7" path="res://scenes/player/player_controller.tscn" id="4_tefeu"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_o5qli")
+level_scene = ExtResource("2_jyhfs")
+environment_scene = ExtResource("3_tbgi4")
+player_scene = ExtResource("4_tefeu")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Actors" type="Node3D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]

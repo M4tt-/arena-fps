@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bdp6qskjdc8l5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2heec"]
+albedo_color = Color(0.4363403, 0.27258053, 0.06726985, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bv8u8"]
+material = SubResource("StandardMaterial3D_2heec")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qtq03"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2heec"]
+size = Vector3(25, 1, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bv8u8"]
+albedo_color = Color(0.07641875, 0.07641875, 0.07641875, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2heec"]
+size = Vector3(25, 1, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtq03"]
+albedo_color = Color(0, 0.14901961, 0.9843137, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qtq03"]
+material = SubResource("StandardMaterial3D_qtq03")
+size = Vector3(2, 1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ylry"]
+size = Vector3(2, 1, 3)
+
+[node name="Level" type="Node3D"]
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Geometry"]
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Floor"]
+mesh = SubResource("BoxMesh_bv8u8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Floor"]
+shape = SubResource("BoxShape3D_qtq03")
+
+[node name="Ledge" type="StaticBody3D" parent="Geometry"]
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Ledge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 45)
+mesh = SubResource("BoxMesh_2heec")
+surface_material_override/0 = SubResource("StandardMaterial3D_bv8u8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Ledge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 45)
+shape = SubResource("BoxShape3D_2heec")
+
+[node name="CrouchCheck" type="StaticBody3D" parent="Geometry"]
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/CrouchCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.5, 35)
+mesh = SubResource("BoxMesh_qtq03")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/CrouchCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.5, 35)
+shape = SubResource("BoxShape3D_1ylry")

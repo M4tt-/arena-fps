@@ -1,0 +1,60 @@
+extends CharacterBody3D
+class_name Projectile
+
+@export var data: ProjectileData
+
+@onready var _collision: CollisionShape3D = $CollisionShape3D
+@onready var _mesh: MeshInstance3D = $MeshInstance3D  # optional
+
+var _time_alive: float = 0.0
+
+func initialize(origin: Vector3, direction: Vector3, shooter_velocity: Vector3) -> void:
+	if data == null:
+		push_error("Projectile has no ProjectileData.")
+		return
+
+	global_position = origin
+
+	# Size (collision)
+	var sphere := _collision.shape as SphereShape3D
+	if sphere:
+		sphere.radius = data.radius
+
+	# Optional: size the visible mesh to match collision
+	if _mesh and _mesh.mesh is SphereMesh:
+		# SphereMesh radius is separate from node scale; easiest is scale node
+		_mesh.scale = Vector3.ONE * (data.radius / 0.5)  # assuming default sphere radius ~0.5 in your mesh
+
+	# Velocity with inheritance
+	var forward := direction.normalized()
+	velocity = forward * data.speed + shooter_velocity * data.inherit_factor
+
+func _physics_process(delta: float) -> void:
+	if data == null:
+		queue_free()
+		return
+
+	_time_alive += delta
+	if _time_alive >= data.life_time:
+		queue_free()
+		return
+
+	# Gravity / drop
+	if data.gravity != 0.0:
+		velocity.y -= data.gravity * delta
+
+	# Swept move (good for fast and slow projectiles)
+	var collision := move_and_collide(velocity * delta)
+	if collision:
+		# Later: damage/explosion/impact effects
+		print("HIT: ", collision.get_collider(), " at ", collision.get_position(), " normal ", collision.get_normal())
+		queue_free()
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
