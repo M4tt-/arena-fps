@@ -22,13 +22,3 @@ func physics_update(delta: float) -> void:
 	# Land
 	if player.is_on_floor():
 		state_machine.change_state(player.grounded_state)
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

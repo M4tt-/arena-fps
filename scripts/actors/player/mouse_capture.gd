@@ -35,11 +35,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	Input.mouse_mode = current_mouse_mode
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#_mouse_input = Vector2.ZERO  # avoids cumulative mouse movement per frame
-	pass
-
 func get_mouse_input() -> Vector2:
 	return _mouse_input
 
