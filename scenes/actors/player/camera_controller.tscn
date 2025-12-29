@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bdp6qskjdc8l5" path="res://levels/level.tscn" id="1_6b34o"]
 [ext_resource type="PackedScene" uid="uid://bwriig0drl4wn" path="res://scenes/environment/environment.tscn" id="2_jtqs4"]
-[ext_resource type="PackedScene" uid="uid://bxdmble8ttjr7" path="res://scenes/player/player_controller.tscn" id="3_v2pe6"]
-[ext_resource type="PackedScene" uid="uid://c0asx6uqndvtn" path="res://scenes/player/mouse_capture.tscn" id="4_j78l8"]
+[ext_resource type="PackedScene" uid="uid://bxdmble8ttjr7" path="res://scenes/actors/player/player_controller.tscn" id="3_v2pe6"]
+[ext_resource type="PackedScene" uid="uid://c0asx6uqndvtn" path="res://scenes/actors/player/mouse_capture.tscn" id="4_j78l8"]
 
 [node name="Main" type="Node"]
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://bxdmble8ttjr7"]
 
-[ext_resource type="Script" uid="uid://do632684ha8lw" path="res://assets/scripts/player/camera_controller.gd" id="1_4q5nu"]
-[ext_resource type="Script" uid="uid://rr37qlol1ape" path="res://assets/scripts/player/player_controller.gd" id="1_iivv4"]
-[ext_resource type="Script" uid="uid://bvx6l4ilht771" path="res://assets/scripts/player/mouse_capture.gd" id="2_0cfoe"]
-[ext_resource type="Script" uid="uid://duj1kffcju6hg" path="res://assets/scripts/shooter.gd" id="4_5afdu"]
-[ext_resource type="PackedScene" uid="uid://ccussklk1jbj6" path="res://scenes/projectile.tscn" id="5_m7hbg"]
-[ext_resource type="Resource" uid="uid://cmwpe8spaiqbc" path="res://assets/data/projectiles/SlowBullet.tres" id="6_2k8ub"]
+[ext_resource type="Script" uid="uid://do632684ha8lw" path="res://scripts/actors/player/camera_controller.gd" id="1_4q5nu"]
+[ext_resource type="Script" uid="uid://rr37qlol1ape" path="res://scripts/actors/player/player_controller.gd" id="1_iivv4"]
+[ext_resource type="Script" uid="uid://bvx6l4ilht771" path="res://scripts/actors/player/mouse_capture.gd" id="2_0cfoe"]
+[ext_resource type="Script" uid="uid://duj1kffcju6hg" path="res://scripts/actors/shooter.gd" id="4_5afdu"]
+[ext_resource type="PackedScene" uid="uid://ccussklk1jbj6" path="res://scenes/actors/projectile.tscn" id="5_m7hbg"]
+[ext_resource type="Resource" uid="uid://cmwpe8spaiqbc" path="res://resources/projectiles/SlowBullet.tres" id="6_2k8ub"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yv3m6"]
 

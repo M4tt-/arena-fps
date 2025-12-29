@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfncmdpr561am"]
+
+[ext_resource type="Script" uid="uid://bqxjdi0x3ecmw" path="res://scripts/main.gd" id="1_yyfjg"]
+[ext_resource type="PackedScene" uid="uid://bdp6qskjdc8l5" path="res://levels/level.tscn" id="2_b1x3f"]
+[ext_resource type="PackedScene" uid="uid://bwriig0drl4wn" path="res://scenes/environment/environment.tscn" id="3_a8run"]
+[ext_resource type="PackedScene" uid="uid://bxdmble8ttjr7" path="res://scenes/actors/player/player_controller.tscn" id="4_ouso4"]
+[ext_resource type="PackedScene" uid="uid://cgis1eamjlb71" path="res://scenes/actors/enemy.tscn" id="5_blune"]
+[ext_resource type="Script" uid="uid://cyh184xk48ric" path="res://scripts/ui/reticle_draw.gd" id="6_th5th"]
+[ext_resource type="Script" uid="uid://co8xjyuv80s8m" path="res://scripts/ui/jetpack_fuel_hud.gd" id="7_7smn1"]
+[ext_resource type="Script" uid="uid://c367m8uyiwfy4" path="res://scripts/ui/velocity_hud.gd" id="8_raeie"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_yyfjg")
+level_scene = ExtResource("2_b1x3f")
+environment_scene = ExtResource("3_a8run")
+player_scene = ExtResource("4_ouso4")
+enemy_scene = ExtResource("5_blune")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Actors" type="Node3D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Reticle" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReticleDraw" type="Control" parent="UI/Reticle"]
+layout_mode = 2
+script = ExtResource("6_th5th")
+thickness = 2.0
+gap_angle = 30.0
+
+[node name="JetpackFuel" type="ProgressBar" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 270.0
+offset_bottom = 47.0
+script = ExtResource("7_7smn1")
+
+[node name="VelocityLabel" type="Label" parent="UI"]
+offset_top = 55.0
+offset_right = 40.0
+offset_bottom = 78.0
+script = ExtResource("8_raeie")
