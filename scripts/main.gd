@@ -13,6 +13,8 @@ func _ready() -> void:
 	_spawn_world()
 	_spawn_player()
 	_spawn_enemy(Vector3(1,1,1), 0)
+	_spawn_enemy(Vector3(6,1,1), 1)
+	_spawn_enemy(Vector3(12,1,1), 2)
 
 func _spawn_world() -> void:
 	if environment_scene:

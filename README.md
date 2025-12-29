@@ -63,3 +63,7 @@ Third-party Godot plugins.
 1. Open Godot 4.5
 2. Open this repository folder
 3. Press Play
+
+## Technical Debt
+
+- `move_and_slide()` is used more than it should be. The collisions can be more nuanced and custom by leveraging `move_and_collide()` + custom collision handling.
