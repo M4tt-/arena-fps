@@ -1,3 +1,5 @@
+# Artificial enemies that display primitive movement patterns
+
 extends MomentumBody3D
 class_name Enemy
 
@@ -6,16 +8,16 @@ enum Behavior { STATIC, HOVER, HOVER_STRAFE }
 @export var behavior: Behavior = Behavior.STATIC
 
 @export_group("Hover (Jetpack)")
-@export var hover_amplitude: float = 2.0      # meters up/down
-@export var hover_period: float = 2.0         # seconds per cycle
+@export var hover_amplitude: float = 2.0 # m
+@export var hover_period: float = 2.0   # seconds per cycle
 
 @export_group("Strafe (Left/Right)")
-@export var strafe_distance: float = 6.0      # meters left/right from start
-@export var strafe_period: float = 3.0        # seconds for left->right->left
+@export var strafe_distance: float = 6.0  # m
+@export var strafe_period: float = 3.0   # s
 
 @export_group("Movement")
-@export var gravity_scale: float = 1.0        # 0 for “jetpack floats”; >0 for falling feel
-@export var ground_friction: float = 20.0     # only relevant if you enable gravity and touch ground
+@export var gravity_scale: float = 1.0 # 0 for “jetpack floats”; >0 for falling feel
+@export var ground_friction: float = 20.0 # only relevant if you enable gravity and touch ground
 
 var _t: float = 0.0
 var _start_pos: Vector3

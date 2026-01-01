@@ -2,18 +2,18 @@ extends MomentumBody3D
 class_name PlayerController
 
 @export_group("Movement")
-@export var acceleration : float = 100.0
-@export var deceleration : float = 120.0
-@export var move_speed : float = 5.0
-@export var jump_velocity : float = 4.0
+@export var acceleration : float = 100.0 # m/s^2
+@export var deceleration : float = 120.0 # m/s^2
+@export var move_speed : float = 5.0 # m/s
+@export var jump_velocity : float = 4.0 # m/s
 @export var air_control := 0.5
 
 @export_group("Jetpack")
-@export var jetpack_thrust: float = 18.0          # upward accel in m/s^2-ish
-@export var jetpack_max_up_speed: float = 10.0    # clamp vertical speed while thrusting
-@export var jetpack_fuel_max: float = 1.5         # seconds of thrust
-@export var jetpack_burn_rate: float = 1.0        # fuel per second
-@export var jetpack_recharge_rate: float = 0.75   # fuel per second (when grounded)
+@export var jetpack_thrust: float = 18.0  # upward accel in m/s^2-ish
+@export var jetpack_max_up_speed: float = 10.0  # clamp vertical speed while thrusting
+@export var jetpack_fuel_max: float = 1.5 # s
+@export var jetpack_burn_rate: float = 1.0 # Hz
+@export var jetpack_recharge_rate: float = 0.75 # Hz
 var jetpack_fuel: float
 
 @export_category("References")
