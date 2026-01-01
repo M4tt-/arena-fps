@@ -1,8 +1,8 @@
 class_name PlayerController extends CharacterBody3D
 
 @export_group("Movement")
-@export var acceleration : float = 10.0
-@export var deceleration : float = 20.0
+@export var acceleration : float = 100.0
+@export var deceleration : float = 120.0
 @export var move_speed : float = 5.0
 @export var jump_velocity : float = 4.0
 @export var air_control := 0.5

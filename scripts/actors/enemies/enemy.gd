@@ -4,6 +4,7 @@ class_name Enemy
 enum Behavior { STATIC, HOVER, HOVER_STRAFE }
 
 @export var behavior: Behavior = Behavior.STATIC
+@export var mass: float = 100
 
 @export_group("Hover (Jetpack)")
 @export var hover_amplitude: float = 2.0      # meters up/down
@@ -14,9 +15,14 @@ enum Behavior { STATIC, HOVER, HOVER_STRAFE }
 @export var strafe_period: float = 3.0        # seconds for left->right->left
 
 @export_group("Movement")
-@export var gravity_scale: float = 0.0        # 0 for “jetpack floats”; >0 for falling feel
+@export var gravity_scale: float = 1.0        # 0 for “jetpack floats”; >0 for falling feel
 @export var ground_friction: float = 20.0     # only relevant if you enable gravity and touch ground
 
+@export_group("Impact Response")
+@export var impact_drag: float = 6.0       # higher = knockback dies faster
+@export var max_impact_speed: float = 25.0     # clamp so it never gets silly
+
+var external_velocity: Vector3 = Vector3.ZERO
 var _t: float = 0.0
 var _start_pos: Vector3
 
@@ -33,20 +39,19 @@ func _physics_process(delta: float) -> void:
 	match behavior:
 		Behavior.STATIC:
 			# Stand still (but still collides)
-			velocity.x = move_toward(velocity.x, 0.0, ground_friction * delta)
-			velocity.z = move_toward(velocity.z, 0.0, ground_friction * delta)
+			pass
 
 		Behavior.HOVER:
 			_apply_hover_only(delta)
-			# Damp the other directions
-			velocity.x = move_toward(velocity.x, 0.0, ground_friction * delta)
-			velocity.z = move_toward(velocity.z, 0.0, ground_friction * delta)
 
 		Behavior.HOVER_STRAFE:
 			_apply_hover_and_strafe(delta)
-			# Damp the other directions
-			velocity.z = move_toward(velocity.z, 0.0, 5 * ground_friction * delta)
+
+	# Include velocity from collisions
+	external_velocity *= exp(-impact_drag * delta)
+	velocity += external_velocity
 	move_and_slide()
+	velocity -= external_velocity
 
 func _apply_hover_only(delta: float) -> void:
 	# Vertical sinusoid around the start position.
@@ -69,3 +74,8 @@ func _apply_hover_and_strafe(delta: float) -> void:
 	var target_x := _start_pos.x + offset_x
 	var x_error := target_x - global_position.x
 	velocity.x = x_error / max(delta, 0.001)
+
+func apply_external_impulse(delta_v: Vector3) -> void:
+	# delta_v is change in velocity, not force
+	external_velocity += delta_v
+	external_velocity = external_velocity.limit_length(max_impact_speed)

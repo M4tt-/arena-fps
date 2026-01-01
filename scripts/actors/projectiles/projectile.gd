@@ -2,11 +2,11 @@ extends CharacterBody3D
 class_name Projectile
 
 @export var data: ProjectileData
+@export var impart_scale: float = 1.0
+@export var _time_alive: float = 0.0
 
 @onready var _collision: CollisionShape3D = $CollisionShape3D
 @onready var _mesh: MeshInstance3D = $MeshInstance3D  # optional
-
-var _time_alive: float = 0.0
 
 func initialize(origin: Vector3, direction: Vector3, shooter_velocity: Vector3) -> void:
 	if data == null:
@@ -48,4 +48,16 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		# Later: damage/explosion/impact effects
 		print("HIT: ", collision.get_collider(), " at ", collision.get_position(), " normal ", collision.get_normal())
+		
+		# Impart momentum
+		var collider := collision.get_collider()
+		if collider and collider.has_method("apply_external_impulse"):
+
+			# Projectile momentum p = m * v
+			var p : Vector3 = data.mass * velocity
+
+			# Transfer momentum to target as a delta-v: Δv = p / m_target
+			var dv_target : Vector3 = (p / max(collider.mass, 0.001)) * impart_scale
+			collider.apply_external_impulse(dv_target)
+			
 		queue_free()
