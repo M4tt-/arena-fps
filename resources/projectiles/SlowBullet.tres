@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="ProjectileData" load_steps=2 format=3 uid="uid://cmwpe8spaiqbc"]
 
-[ext_resource type="Script" uid="uid://dmudksiw62osk" path="res://resources/projectiles/projectile_data.gd" id="1_7nha8"]
+[ext_resource type="Script" uid="uid://dmudksiw62osk" path="res://resources/projectiles/projectile_data.gd" id="1_i5k60"]
 
 [resource]
-script = ExtResource("1_7nha8")
+script = ExtResource("1_i5k60")
+speed = 50.0
+life_time = 2.9699999999999998
 metadata/_custom_type_script = "uid://dmudksiw62osk"
