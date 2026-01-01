@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_i5k60")
 speed = 50.0
-life_time = 2.9699999999999998
+life_time = 2.97
 metadata/_custom_type_script = "uid://dmudksiw62osk"

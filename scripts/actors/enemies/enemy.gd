@@ -1,10 +1,9 @@
-extends CharacterBody3D
+extends MomentumBody3D
 class_name Enemy
 
 enum Behavior { STATIC, HOVER, HOVER_STRAFE }
 
 @export var behavior: Behavior = Behavior.STATIC
-@export var mass: float = 100
 
 @export_group("Hover (Jetpack)")
 @export var hover_amplitude: float = 2.0      # meters up/down
@@ -18,11 +17,6 @@ enum Behavior { STATIC, HOVER, HOVER_STRAFE }
 @export var gravity_scale: float = 1.0        # 0 for “jetpack floats”; >0 for falling feel
 @export var ground_friction: float = 20.0     # only relevant if you enable gravity and touch ground
 
-@export_group("Impact Response")
-@export var impact_drag: float = 6.0       # higher = knockback dies faster
-@export var max_impact_speed: float = 25.0     # clamp so it never gets silly
-
-var external_velocity: Vector3 = Vector3.ZERO
 var _t: float = 0.0
 var _start_pos: Vector3
 
@@ -48,7 +42,7 @@ func _physics_process(delta: float) -> void:
 			_apply_hover_and_strafe(delta)
 
 	# Include velocity from collisions
-	external_velocity *= exp(-impact_drag * delta)
+	integrate_external(delta)
 	velocity += external_velocity
 	move_and_slide()
 	velocity -= external_velocity
@@ -74,8 +68,3 @@ func _apply_hover_and_strafe(delta: float) -> void:
 	var target_x := _start_pos.x + offset_x
 	var x_error := target_x - global_position.x
 	velocity.x = x_error / max(delta, 0.001)
-
-func apply_external_impulse(delta_v: Vector3) -> void:
-	# delta_v is change in velocity, not force
-	external_velocity += delta_v
-	external_velocity = external_velocity.limit_length(max_impact_speed)
