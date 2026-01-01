@@ -1,4 +1,5 @@
-class_name PlayerController extends CharacterBody3D
+extends MomentumBody3D
+class_name PlayerController
 
 @export_group("Movement")
 @export var acceleration : float = 100.0
@@ -28,8 +29,16 @@ var jetpack_fuel: float
 
 func _physics_process(delta: float) -> void:
 
+	# Let movement/state logic compute desired velocity first
 	state_machine.physics_update(delta)
+
+	# Incorporate external impulses
+	integrate_external(delta)
+
+	# Apply external for this tick only
+	velocity += external_velocity
 	move_and_slide()
+	velocity -= external_velocity
 
 func update_rotation(rotation_input) -> void:
 	global_transform.basis = Basis.from_euler(rotation_input)
@@ -93,7 +102,7 @@ func handle_ground_movement(delta: float) -> void:
 	velocity.z = horiz.z
 
 func handle_air_movement(delta: float) -> void:
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var wish_dir := (global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)).normalized()
 
 	var horiz := Vector3(velocity.x, 0.0, velocity.z)
