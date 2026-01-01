@@ -1,4 +1,4 @@
-extends MomentumCharacterBody3D
+extends CharacterBody3D
 class_name Enemy
 
 enum Behavior { STATIC, HOVER, HOVER_STRAFE }
@@ -30,8 +30,6 @@ func _physics_process(delta: float) -> void:
 	if gravity_scale != 0.0:
 		velocity += get_gravity() * gravity_scale * delta
 
-	integrate_external(delta)
-
 	match behavior:
 		Behavior.STATIC:
 			# Stand still (but still collides)
@@ -48,11 +46,7 @@ func _physics_process(delta: float) -> void:
 			_apply_hover_and_strafe(delta)
 			# Damp the other directions
 			velocity.z = move_toward(velocity.z, 0.0, 5 * ground_friction * delta)
-	capture_pre_slide_velocity()
-	begin_move_with_external()
 	move_and_slide()
-	end_move_with_external()
-	exchange_momentum_after_move()
 
 func _apply_hover_only(delta: float) -> void:
 	# Vertical sinusoid around the start position.
