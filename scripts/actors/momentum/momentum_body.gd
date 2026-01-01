@@ -6,11 +6,11 @@ extends CharacterBody3D
 class_name MomentumBody3D
 
 @export_category("Momentum")
-@export var mass: float = 100.0                 # gameplay mass (larger = harder to push)
+@export var mass: float = 100.0 # kg
 
 @export_group("Impact Response")
-@export var impact_decay: float = 6.0           # higher = knockback dies faster
-@export var max_external_speed: float = 100.0     # clamp so it never gets silly
+@export var impact_decay: float = 6.0 # Hz
+@export var max_external_speed: float = 100.0 # m/s
 
 var external_velocity: Vector3 = Vector3.ZERO
 

@@ -35,7 +35,7 @@ Levels compose actors and environment but do not define actor behavior.
 All GDScript source code.
 
 - `actors/`
-  - Logic for all actor types, including player, enemies, and projectiles
+  - Logic for all actor types, including player, enemies, projectiles, etc.
 - `ui/`
   - HUD and UI logic
 
@@ -66,4 +66,4 @@ Third-party Godot plugins.
 
 ## Technical Debt
 
-- `move_and_slide()` is used more than it should be. The collisions can be more nuanced and custom by leveraging `move_and_collide()` + custom collision handling.
+- `move_and_slide()` may be used more than it should be. The collisions can be more nuanced and custom by leveraging `move_and_collide()` + custom collision handling.

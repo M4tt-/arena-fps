@@ -6,8 +6,8 @@ class_name CameraController extends Node3D
 @export var component_mouse_capture : MouseCaptureComponent
 @export_category("Camera Settings")
 @export_group("Camera Tilt")
-@export_range(-90, -60) var tilt_lower_limit : int = -90
-@export_range(60, 90) var tilt_upper_limit : int = 90
+@export_range(-90, -60) var tilt_lower_limit : int = -90 # deg
+@export_range(60, 90) var tilt_upper_limit : int = 90 # deg
 
 var _rotation : Vector3
 

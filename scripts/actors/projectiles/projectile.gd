@@ -2,8 +2,8 @@ extends CharacterBody3D
 class_name Projectile
 
 @export var data: ProjectileData
-@export var impart_scale: float = 1.0
-@export var _time_alive: float = 0.0
+@export var impart_scale: float = 1.0 # unitless
+@export var _time_alive: float = 0.0 # seconds
 
 @onready var _collision: CollisionShape3D = $CollisionShape3D
 @onready var _mesh: MeshInstance3D = $MeshInstance3D  # optional

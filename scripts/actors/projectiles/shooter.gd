@@ -1,10 +1,11 @@
 extends Node
 class_name Shooter
 
+@export_category("Shooting Settings")
 @export var projectile_scene: PackedScene
 @export var projectile_data: ProjectileData
-@export var fire_rate: float = 4.0
-@export var muzzle_distance: float = 0.7
+@export var fire_rate: float = 4.0 # Hz
+@export var muzzle_distance: float = 0.7 # m
 @export var inherit_factor_override: float = -1.0  # -1 means "use data.inherit_factor"
 
 @export_category("References")
