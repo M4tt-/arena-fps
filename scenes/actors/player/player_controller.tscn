@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxdmble8ttjr7"]
+[gd_scene load_steps=15 format=3 uid="uid://bxdmble8ttjr7"]
 
 [ext_resource type="Script" uid="uid://do632684ha8lw" path="res://scripts/actors/player/camera_controller.gd" id="1_4q5nu"]
 [ext_resource type="Script" uid="uid://rr37qlol1ape" path="res://scripts/actors/player/player_controller.gd" id="1_iivv4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ccussklk1jbj6" path="res://scenes/actors/projectile.tscn" id="5_m7hbg"]
 [ext_resource type="Resource" uid="uid://cmwpe8spaiqbc" path="res://resources/projectiles/SlowBullet.tres" id="6_2k8ub"]
 [ext_resource type="Script" uid="uid://31v8xn8hogck" path="res://scripts/ui/health_bar.gd" id="7_yks8q"]
+[ext_resource type="Script" uid="uid://bav1y5atteaa4" path="res://scripts/actors/health.gd" id="8_e0umb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yv3m6"]
 
@@ -82,3 +83,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_yks8q")
 [node name="Fill" type="MeshInstance3D" parent="UiAnchor/HealthBar"]
 mesh = SubResource("QuadMesh_e0umb")
 surface_material_override/0 = SubResource("StandardMaterial3D_hse84")
+
+[node name="Health" type="Node3D" parent="."]
+script = ExtResource("8_e0umb")

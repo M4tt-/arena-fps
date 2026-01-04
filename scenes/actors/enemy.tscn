@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgis1eamjlb71"]
+[gd_scene load_steps=11 format=3 uid="uid://cgis1eamjlb71"]
 
 [ext_resource type="Script" uid="uid://ba0gwt8g4nydl" path="res://scripts/actors/enemies/enemy.gd" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://31v8xn8hogck" path="res://scripts/ui/health_bar.gd" id="2_qkj82"]
+[ext_resource type="Script" uid="uid://bav1y5atteaa4" path="res://scripts/actors/health.gd" id="3_35asm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8tegq"]
 
@@ -51,3 +52,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qkj82")
 [node name="Fill" type="MeshInstance3D" parent="UiAnchor/HealthBar"]
 mesh = SubResource("QuadMesh_qkj82")
 surface_material_override/0 = SubResource("StandardMaterial3D_35asm")
+
+[node name="Health" type="Node3D" parent="."]
+script = ExtResource("3_35asm")

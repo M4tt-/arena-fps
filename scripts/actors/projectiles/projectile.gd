@@ -8,6 +8,20 @@ class_name Projectile
 @onready var _collision: CollisionShape3D = $CollisionShape3D
 @onready var _mesh: MeshInstance3D = $MeshInstance3D  # optional
 
+@export var damage: float = 25.0
+
+func _find_health(collider: Node) -> Health:
+	# Check the body and walk up parents (colliders are often children)
+	# The key is the collider has a child Node named "Health".
+	# Health should have a script that implements "apply_damage()"
+	var p: Node = collider
+	while p:
+		var h := p.find_child("Health", true, false) as Health
+		if h:
+			return h
+		p = p.get_parent()
+	return null
+
 func initialize(origin: Vector3, direction: Vector3, shooter_velocity: Vector3) -> void:
 	if data == null:
 		push_error("Projectile has no ProjectileData.")
@@ -47,10 +61,15 @@ func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(velocity * delta)
 	if collision:
 		# Later: damage/explosion/impact effects
-		print("HIT: ", collision.get_collider(), " at ", collision.get_position(), " normal ", collision.get_normal())
-		
-		# Impart momentum
 		var collider := collision.get_collider()
+		print("HIT: ", collider, " at ", collision.get_position(), " normal ", collision.get_normal())
+		
+		# Deal Damage
+		var health := _find_health(collider)
+		if health:
+			health.apply_damage(damage)
+
+		# Impart Momentum
 		if collider and collider.has_method("apply_external_impulse"):
 
 			# Projectile momentum p = m * v
@@ -59,5 +78,5 @@ func _physics_process(delta: float) -> void:
 			# Transfer momentum to target as a delta-v: Δv = p / m_target
 			var dv_target : Vector3 = (p / max(collider.mass, 0.001)) * impart_scale
 			collider.apply_external_impulse(dv_target)
-			
+
 		queue_free()
