@@ -26,6 +26,8 @@ var jetpack_fuel: float
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var camera_pivot: Node3D = $CameraController
+@onready var cam: Camera3D = $CameraController/PitchPivot/CameraRig/Boom/Camera3D
+@onready var health_bar: Node3D = $UiAnchor/HealthBar   # adjust path
 
 func _physics_process(delta: float) -> void:
 
@@ -68,6 +70,10 @@ func _ready() -> void:
 
 	# Init jetpack
 	jetpack_fuel = jetpack_fuel_max
+
+	# If this player's camera is the one being used, hide the bar.
+	if cam and cam.current:
+		health_bar.visible = false
 
 func update_jetpack_fuel(delta: float, is_jetpack_pressed: bool) -> void:
 	if is_jetpack_pressed:
