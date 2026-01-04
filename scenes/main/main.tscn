@@ -47,3 +47,14 @@ offset_top = 55.0
 offset_right = 40.0
 offset_bottom = 78.0
 script = ExtResource("8_raeie")
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_top = 15.0
+offset_right = -2.0
+offset_bottom = 42.0
+grow_horizontal = 0
+value = 100.0

@@ -9,6 +9,9 @@ extends Node
 @onready var world := $World
 @onready var actors := $Actors
 
+@onready var ui_health_bar: ProgressBar = $UI/HealthBar
+
+
 func _ready() -> void:
 	_spawn_world()
 	_spawn_player()
@@ -35,6 +38,21 @@ func _spawn_player() -> void:
 	# Optional: put player somewhere sensible for testing
 	if player is Node3D:
 		player.global_position = Vector3(0, 1, 10)
+
+	# Bind HUD bar to player's Health
+	var health := player.find_child("Health", true, false) as Health
+	if health:
+		# Initialize immediately
+		_on_player_health_changed(health.current_health, health.max_health)
+
+		# Subscribe to updates
+		health.changed.connect(_on_player_health_changed)
+	else:
+		push_error("Player has no Health node; cannot bind HUD.")
+
+func _on_player_health_changed(cur: float, max_h: float) -> void:
+	ui_health_bar.max_value = max_h
+	ui_health_bar.value = cur
 
 func _spawn_enemy(pos: Vector3, behavior: int) -> void:
 	if not enemy_scene:
