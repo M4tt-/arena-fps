@@ -24,14 +24,20 @@ mesh = SubResource("CapsuleMesh_yv3m6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_lvefo")
 
-[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("player_controller", "component_mouse_capture")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("player_controller", "component_mouse_capture", "camera_rig", "boom", "camera")]
 script = ExtResource("1_4q5nu")
 debug = true
 player_controller = NodePath("..")
 component_mouse_capture = NodePath("../Components/MouseCapture")
+camera_rig = NodePath("CameraRig")
+boom = NodePath("CameraRig/Boom")
+camera = NodePath("CameraRig/Boom/Camera3D")
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
+[node name="CameraRig" type="Node3D" parent="CameraController"]
+
+[node name="Boom" type="SpringArm3D" parent="CameraController/CameraRig"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/CameraRig/Boom"]
 
 [node name="Components" type="Node" parent="."]
 
@@ -43,4 +49,4 @@ script = ExtResource("4_5afdu")
 projectile_scene = ExtResource("5_m7hbg")
 projectile_data = ExtResource("6_2k8ub")
 player = NodePath("..")
-camera = NodePath("../CameraController/Camera3D")
+camera = NodePath("../CameraController/CameraRig/Boom/Camera3D")
