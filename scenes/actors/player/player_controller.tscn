@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxdmble8ttjr7"]
+[gd_scene load_steps=14 format=3 uid="uid://bxdmble8ttjr7"]
 
 [ext_resource type="Script" uid="uid://do632684ha8lw" path="res://scripts/actors/player/camera_controller.gd" id="1_4q5nu"]
 [ext_resource type="Script" uid="uid://rr37qlol1ape" path="res://scripts/actors/player/player_controller.gd" id="1_iivv4"]
@@ -6,10 +6,25 @@
 [ext_resource type="Script" uid="uid://duj1kffcju6hg" path="res://scripts/actors/projectiles/shooter.gd" id="4_5afdu"]
 [ext_resource type="PackedScene" uid="uid://ccussklk1jbj6" path="res://scenes/actors/projectile.tscn" id="5_m7hbg"]
 [ext_resource type="Resource" uid="uid://cmwpe8spaiqbc" path="res://resources/projectiles/SlowBullet.tres" id="6_2k8ub"]
+[ext_resource type="Script" uid="uid://31v8xn8hogck" path="res://scripts/ui/health_bar.gd" id="7_yks8q"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yv3m6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvefo"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4py70"]
+size = Vector2(1.2, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yks8q"]
+shading_mode = 0
+albedo_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_e0umb"]
+size = Vector2(1.2, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hse84"]
+shading_mode = 0
+albedo_color = Color(0.21546075, 0.738193, 0.3177621, 1)
 
 [node name="PlayerController" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
@@ -50,3 +65,17 @@ projectile_scene = ExtResource("5_m7hbg")
 projectile_data = ExtResource("6_2k8ub")
 player = NodePath("..")
 camera = NodePath("../CameraController/CameraRig/Boom/Camera3D")
+
+[node name="UiAnchor" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+
+[node name="HealthBar" type="Node3D" parent="UiAnchor"]
+script = ExtResource("7_yks8q")
+
+[node name="Bg" type="MeshInstance3D" parent="UiAnchor/HealthBar"]
+mesh = SubResource("QuadMesh_4py70")
+surface_material_override/0 = SubResource("StandardMaterial3D_yks8q")
+
+[node name="Fill" type="MeshInstance3D" parent="UiAnchor/HealthBar"]
+mesh = SubResource("QuadMesh_e0umb")
+surface_material_override/0 = SubResource("StandardMaterial3D_hse84")
