@@ -32,6 +32,10 @@ func _ready() -> void:
 
 	_apply_view_mode()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_third_person"):
+		toggle_view_mode()
+
 func _physics_process(delta: float) -> void:
 	if component_mouse_capture == null:
 		return
@@ -40,6 +44,14 @@ func _physics_process(delta: float) -> void:
 	if look != Vector2.ZERO:
 		update_camera_rotation(look)
 		component_mouse_capture.clear_mouse_input()
+
+func toggle_view_mode() -> void:
+	view_mode = ViewMode.THIRD_PERSON if view_mode == ViewMode.FIRST_PERSON else ViewMode.FIRST_PERSON
+	_apply_view_mode()
+
+func set_view_mode(mode: ViewMode) -> void:
+	view_mode = mode
+	_apply_view_mode()
 
 func update_camera_rotation(input: Vector2) -> void:
 	_rotation.x += input.y
