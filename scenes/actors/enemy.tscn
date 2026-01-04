@@ -36,16 +36,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7p1mj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_7p1mj")
 
-[node name="HealthBar" type="Node3D" parent="."]
+[node name="UiAnchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="HealthBar" type="Node3D" parent="UiAnchor"]
 script = ExtResource("2_qkj82")
 percent = 0.5
 
-[node name="Bg" type="MeshInstance3D" parent="HealthBar"]
+[node name="Bg" type="MeshInstance3D" parent="UiAnchor/HealthBar"]
 transparency = 0.5
 mesh = SubResource("QuadMesh_4i4j6")
 surface_material_override/0 = SubResource("StandardMaterial3D_qkj82")
 
-[node name="Fill" type="MeshInstance3D" parent="HealthBar"]
+[node name="Fill" type="MeshInstance3D" parent="UiAnchor/HealthBar"]
 mesh = SubResource("QuadMesh_qkj82")
 surface_material_override/0 = SubResource("StandardMaterial3D_35asm")
