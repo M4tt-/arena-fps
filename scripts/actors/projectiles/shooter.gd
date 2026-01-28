@@ -49,4 +49,4 @@ func _fire() -> void:
 	# Add to world (not player)
 	get_tree().current_scene.add_child(proj)
 
-	proj.initialize(origin, forward, player.velocity * inherit_factor)
+	proj.initialize(origin, forward, player.velocity * inherit_factor, player)

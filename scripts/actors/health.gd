@@ -2,6 +2,7 @@ extends Node
 class_name Health
 
 signal changed(current: float, max: float)
+signal died
 
 @export var max_health: float = 100.0
 @export var current_health: float = 100.0
@@ -15,11 +16,14 @@ func _ready() -> void:
 	changed.emit(current_health, max_health)
 
 func apply_damage(amount: float) -> void:
+	print("DAMAGE: ", owner, " (Health node: ", get_path(), ") amount=", amount)
 	if amount <= 0.0:
 		return
 	current_health = max(0.0, current_health - amount)
 	_update_bar()
 	changed.emit(current_health, max_health)
+	if current_health <= 0.0:
+		died.emit()
 
 func heal(amount: float) -> void:
 	if amount <= 0.0:
