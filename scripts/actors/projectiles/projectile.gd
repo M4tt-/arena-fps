@@ -10,19 +10,24 @@ class_name Projectile
 
 @export var damage: float = 25.0
 
+var shooter: Node = null
+
 func _find_health(collider: Node) -> Health:
 	# Check the body and walk up parents (colliders are often children)
 	# The key is the collider has a child Node named "Health".
 	# Health should have a script that implements "apply_damage()"
 	var p: Node = collider
 	while p:
-		var h := p.find_child("Health", true, false) as Health
-		if h:
-			return h
+		# Only inspect DIRECT children at each level (no recursive search)
+		# Assumes Health node is direct child of actor.
+		for child in p.get_children():
+			if child is Health:
+				return child
 		p = p.get_parent()
 	return null
 
-func initialize(origin: Vector3, direction: Vector3, shooter_velocity: Vector3) -> void:
+func initialize(origin: Vector3, direction: Vector3, shooter_velocity: Vector3, shooter_node: Node) -> void:
+	shooter = shooter_node
 	if data == null:
 		push_error("Projectile has no ProjectileData.")
 		return
@@ -63,7 +68,12 @@ func _physics_process(delta: float) -> void:
 		# Later: damage/explosion/impact effects
 		var collider := collision.get_collider()
 		print("HIT: ", collider, " at ", collision.get_position(), " normal ", collision.get_normal())
-		
+
+		# Don't deal damage
+		if collider == shooter or (shooter and shooter.is_ancestor_of(collider)):
+			queue_free()
+			return
+
 		# Deal Damage
 		var health := _find_health(collider)
 		if health:
