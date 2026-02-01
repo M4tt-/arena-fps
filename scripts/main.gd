@@ -37,7 +37,7 @@ func _spawn_player() -> void:
 
 	# Optional: put player somewhere sensible for testing
 	if player is Node3D:
-		player.global_position = Vector3(0, 1, 10)
+		player.global_position = Vector3(-30, 20, 40)
 
 	# Bind HUD bar to player's Health
 	var health := player.find_child("Health", true, false) as Health

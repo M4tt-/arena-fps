@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdp6qskjdc8l5"]
+[gd_scene load_steps=14 format=3 uid="uid://bdp6qskjdc8l5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2heec"]
 albedo_color = Color(0.4363403, 0.27258053, 0.06726985, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bv8u8"]
 material = SubResource("StandardMaterial3D_2heec")
-size = Vector3(100, 1, 100)
+size = Vector3(150, 1, 150)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qtq03"]
-size = Vector3(100, 1, 100)
+size = Vector3(150, 1, 150)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2heec"]
 size = Vector3(25, 1, 3)
@@ -28,6 +28,18 @@ size = Vector3(2, 1, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ylry"]
 size = Vector3(2, 1, 3)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_umreq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_80vhd"]
+size = Vector3(20, 1, 59)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hjsbj"]
+size = Vector3(20, 1, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwqvt"]
+albedo_color = Color(0.67058825, 1, 1, 1)
+roughness = 0.47
 
 [node name="Level" type="Node3D"]
 
@@ -64,3 +76,29 @@ mesh = SubResource("BoxMesh_qtq03")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/CrouchCheck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.5, 35)
 shape = SubResource("BoxShape3D_1ylry")
+
+[node name="Hill" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 0.95105654, 0.309017, 0, -0.309017, 0.95105654, 0, 8, 10)
+physics_material_override = SubResource("PhysicsMaterial_umreq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Hill"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -9.536743e-07, 12.000004)
+shape = SubResource("BoxShape3D_80vhd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Hill"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 7)
+mesh = SubResource("BoxMesh_hjsbj")
+surface_material_override/0 = SubResource("StandardMaterial3D_cwqvt")
+
+[node name="Runout" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -48)
+physics_material_override = SubResource("PhysicsMaterial_umreq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Runout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 6.5)
+shape = SubResource("BoxShape3D_80vhd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Runout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 6.5)
+mesh = SubResource("BoxMesh_hjsbj")
+surface_material_override/0 = SubResource("StandardMaterial3D_cwqvt")
