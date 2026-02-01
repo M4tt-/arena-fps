@@ -40,3 +40,8 @@ func _update_bar() -> void:
 	else:
 		if _bar:
 			print("Bar exists but has no set_percent(): ", _bar, " methods? ", _bar.get_method_list())
+
+func reset_full() -> void:
+	current_health = max_health
+	_update_bar()
+	changed.emit(current_health, max_health)
